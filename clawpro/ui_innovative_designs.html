@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>干饭基金 - 创新设计方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+            font-size: 32px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+        .phone-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+        .phone-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .phone {
+            width: 375px;
+            height: 750px;
+            background: #fff;
+            border-radius: 45px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        .phone::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 35px;
+            background: #000;
+            border-radius: 0 0 25px 25px;
+            z-index: 100;
+        }
+        .phone-content {
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 45px;
+        }
+        .style-label {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            max-width: 300px;
+        }
+        .style-desc {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+            margin-top: 8px;
+            max-width: 300px;
+        }
+        
+        /* ===== 方案一：卡片式仪表盘 ===== */
+        .dashboard-cards {
+            background: linear-gradient(180deg, #F8F9FE 0%, #FFFFFF 100%);
+        }
+        .dashboard-cards .header {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dashboard-cards .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6C5CE7;
+        }
+        .dashboard-cards .menu-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #6C5CE7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        .dashboard-cards .main-card {
+            margin: 15px 20px;
+            padding: 30px;
+            background: linear-gradient(135deg, #6C5CE7 0%, #A29BFE 100%);
+            border-radius: 30px;
+            color: white;
+            box-shadow: 0 15px 40px rgba(108, 92, 231, 0.3);
+        }
+        .dashboard-cards .card-title {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        .dashboard-cards .card-amount {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .dashboard-cards .card-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .dashboard-cards .stat-item {
+            text-align: center;
+        }
+        .dashboard-cards .stat-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        .dashboard-cards .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 3px;
+        }
+        .dashboard-cards .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 12px;
+            padding: 0 20px;
+            margin: 20px 0;
+        }
+        .dashboard-cards .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 10px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .dashboard-cards .action-item:hover {
+            transform: translateY(-3px);
+        }
+        .dashboard-cards .action-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+        .dashboard-cards .action-label {
+            font-size: 11px;
+            color: #636E72;
+            font-weight: 500;
+        }
+        .dashboard-cards .members-section {
+            padding: 0 20px;
+        }
+        .dashboard-cards .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .dashboard-cards .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2D3436;
+        }
+        .dashboard-cards .see-all {
+            font-size: 12px;
+            color: #6C5CE7;
+            font-weight: 500;
+        }
+        .dashboard-cards .member-card {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .dashboard-cards .member-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 15px;
+        }
+        .dashboard-cards .member-details {
+            flex: 1;
+        }
+        .dashboard-cards .member-name {
+            font-weight: bold;
+            color: #2D3436;
+            margin-bottom: 3px;
+        }
+        .dashboard-cards .member-contribution {
+            font-size: 13px;
+            color: #636E72;
+        }
+        .dashboard-cards .member-amount {
+            text-align: right;
+        }
+        .dashboard-cards .amount-value {
+            font-weight: bold;
+            color: #6C5CE7;
+            font-size: 16px;
+        }
+        .dashboard-cards .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+        .dashboard-cards .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #B2BEC3;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        .dashboard-cards .nav-item.active {
+            color: #6C5CE7;
+        }
+        .dashboard-cards .nav-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        
+        /* ===== 方案二：底部操作栏设计 ===== */
+        .bottom-action {
+            background: #0F0F23;
+            color: white;
+        }
+        .bottom-action .header {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bottom-action .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .bottom-action .wallet-section {
+            margin: 10px 20px;
+            padding: 25px;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .bottom-action .wallet-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        .bottom-action .wallet-label {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        .bottom-action .wallet-amount {
+            font-size: 44px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .bottom-action .wallet-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .bottom-action .wallet-btn {
+            flex: 1;
+            padding: 12px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+        .bottom-action .quick-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 0 20px;
+            margin: 15px 0;
+        }
+        .bottom-action .stat-box {
+            background: #1E1E3F;
+            padding: 18px;
+            border-radius: 16px;
+        }
+        .bottom-action .stat-box-icon {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .bottom-action .stat-box-value {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        .bottom-action .stat-box-label {
+            font-size: 11px;
+            opacity: 0.6;
+        }
+        .bottom-action .recent-section {
+            padding: 0 20px;
+            margin-bottom: 100px;
+        }
+        .bottom-action .recent-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        .bottom-action .transaction-item {
+            display: flex;
+            align-items: center;
+            background: #1E1E3F;
+            padding: 15px;
+            border-radius: 16px;
+            margin-bottom: 10px;
+        }
+        .bottom-action .trans-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 12px;
+        }
+        .bottom-action .trans-icon.income {
+            background: rgba(0, 255, 127, 0.2);
+            color: #00FF7F;
+        }
+        .bottom-action .trans-icon.expense {
+            background: rgba(255, 107, 107, 0.2);
+            color: #FF6B6B;
+        }
+        .bottom-action .trans-details {
+            flex: 1;
+        }
+        .bottom-action .trans-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        .bottom-action .trans-time {
+            font-size: 11px;
+            opacity: 0.5;
+        }
+        .bottom-action .trans-amount {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .bottom-action .trans-amount.income {
+            color: #00FF7F;
+        }
+        .bottom-action .trans-amount.expense {
+            color: #FF6B6B;
+        }
+        .bottom-action .floating-bar {
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+            right: 20px;
+            background: rgba(30, 30, 63, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-around;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .bottom-action .fab-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .bottom-action .fab-item:hover {
+            color: white;
+        }
+        .bottom-action .fab-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .bottom-action .fab-icon.charge {
+            background: linear-gradient(135deg, #00FF7F, #00CC66);
+        }
+        .bottom-action .fab-icon.consume {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+        }
+        .bottom-action .fab-icon.members {
+            background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+        }
+        .bottom-action .fab-icon.history {
+            background: linear-gradient(135deg, #74B9FF, #0984E3);
+        }
+        
+        /* ===== 方案三：分屏侧滑设计 ===== */
+        .split-sliding {
+            background: #FFFFFF;
+        }
+        .split-sliding .split-container {
+            display: flex;
+            height: 100%;
+        }
+        .split-sliding .left-panel {
+            width: 70%;
+            background: #FFFFFF;
+            padding: 20px;
+        }
+        .split-sliding .right-panel {
+            width: 30%;
+            background: #F8F9FA;
+            padding: 15px;
+            border-left: 1px solid #E9ECEF;
+        }
+        .split-sliding .panel-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .split-sliding .app-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2D3436;
+            flex: 1;
+        }
+        .split-sliding .balance-card {
+            background: linear-gradient(135deg, #00B894, #00CEC9);
+            padding: 25px;
+            border-radius: 24px;
+            color: white;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 184, 148, 0.3);
+        }
+        .split-sliding .balance-label {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        .split-sliding .balance-value {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .split-sliding .action-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .split-sliding .action-btn {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .split-sliding .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        .split-sliding .btn-charge {
+            background: linear-gradient(135deg, #00B894, #00CEC9);
+            color: white;
+        }
+        .split-sliding .btn-consume {
+            background: linear-gradient(135deg, #FF7675, #FD79A8);
+            color: white;
+        }
+        .split-sliding .members-list {
+            margin-bottom: 20px;
+        }
+        .split-sliding .list-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #636E72;
+            margin-bottom: 12px;
+        }
+        .split-sliding .member-row {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #F8F9FA;
+            border-radius: 14px;
+            margin-bottom: 8px;
+        }
+        .split-sliding .row-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: #00CEC9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 12px;
+        }
+        .split-sliding .row-info {
+            flex: 1;
+        }
+        .split-sliding .row-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2D3436;
+        }
+        .split-sliding .row-amount {
+            font-size: 12px;
+            color: #00B894;
+            font-weight: bold;
+        }
+        .split-sliding .right-section {
+            margin-bottom: 20px;
+        }
+        .split-sliding .section-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: #B2BEC3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .split-sliding .quick-link {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .split-sliding .quick-link:hover {
+            background: #00CEC9;
+            color: white;
+        }
+        .split-sliding .link-icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        .split-sliding .link-text {
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .split-sliding .stat-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin: 0 auto 15px;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+        .split-sliding .circle-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .split-sliding .circle-label {
+            font-size: 9px;
+            opacity: 0.9;
+        }
+        .split-sliding .recent-item {
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 8px;
+        }
+        .split-sliding .recent-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .split-sliding .recent-icon.income {
+            background: rgba(0, 184, 148, 0.2);
+            color: #00B894;
+        }
+        .split-sliding .recent-icon.expense {
+            background: rgba(255, 118, 117, 0.2);
+            color: #FF7675;
+        }
+        .split-sliding .recent-title {
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        .split-sliding .recent-amount {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .split-sliding .recent-amount.income {
+            color: #00B894;
+        }
+        .split-sliding .recent-amount.expense {
+            color: #FF7675;
+        }
+        
+        /* ===== 方案四：圆环中心设计 ===== */
+        .circular-hub {
+            background: linear-gradient(180deg, #1A1A2E 0%, #0F0F1A 100%);
+            color: white;
+        }
+        .circular-hub .header {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .circular-hub .greeting {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        .circular-hub .user-name {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .circular-hub .profile-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .circular-hub .circular-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin: 30px auto;
+        }
+        .circular-hub .outer-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #6C5CE7, #A29BFE, #74B9FF, #0984E3, #6C5CE7);
+            padding: 3px;
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .circular-hub .outer-ring::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #1A1A2E;
+        }
+        .circular-hub .inner-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #2D3436, #1A1A2E);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .circular-hub .balance-label {
+            font-size: 12px;
+            opacity: 0.6;
+            margin-bottom: 10px;
+        }
+        .circular-hub .balance-amount {
+            font-size: 36px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .circular-hub .orbit-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .circular-hub .orbit-item {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        .circular-hub .orbit-item:hover {
+            transform: scale(1.15);
+        }
+        .circular-hub .orbit-item.charge {
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #00FF7F, #00CC66);
+        }
+        .circular-hub .orbit-item.consume {
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+        }
+        .circular-hub .orbit-item.members {
+            top: 50%;
+            left: -10px;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+        }
+        .circular-hub .orbit-item.history {
+            top: 50%;
+            right: -10px;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #74B9FF, #0984E3);
+        }
+        .circular-hub .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+            margin-top: 40px;
+        }
+        .circular-hub .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 8px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .circular-hub .action-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+        .circular-hub .action-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .circular-hub .action-label {
+            font-size: 10px;
+            opacity: 0.7;
+        }
+        .circular-hub .members-preview {
+            padding: 0 20px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        .circular-hub .preview-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        .circular-hub .member-cards {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .circular-hub .member-card {
+            min-width: 100px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .circular-hub .card-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0 auto 10px;
+        }
+        .circular-hub .card-name {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .circular-hub .card-amount {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+        
+        /* ===== 方案五：毛玻璃悬浮设计 ===== */
+        .glass-floating {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100%;
+        }
+        .glass-floating .glass-container {
+            padding: 20px;
+        }
+        .glass-floating .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .glass-floating .brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .glass-floating .notif {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+        .glass-floating .hero-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-floating .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+        }
+        .glass-floating .hero-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 10px;
+        }
+        .glass-floating .hero-amount {
+            font-size: 42px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+        }
+        .glass-floating .hero-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        .glass-floating .hero-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .glass-floating .hero-btn:hover {
+            transform: translateY(-2px);
+        }
+        .glass-floating .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        .glass-floating .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .glass-floating .glass-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .glass-floating .glass-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .glass-floating .glass-item:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-3px);
+        }
+        .glass-floating .item-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        .glass-floating .item-icon.green {
+            background: rgba(0, 255, 127, 0.2);
+            color: #00FF7F;
+        }
+        .glass-floating .item-icon.red {
+            background: rgba(255, 107, 107, 0.2);
+            color: #FF6B6B;
+        }
+        .glass-floating .item-icon.blue {
+            background: rgba(116, 185, 255, 0.2);
+            color: #74B9FF;
+        }
+        .glass-floating .item-icon.purple {
+            background: rgba(108, 92, 231, 0.2);
+            color: #6C5CE7;
+        }
+        .glass-floating .item-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 5px;
+        }
+        .glass-floating .item-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+        }
+        .glass-floating .floating-list {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 100px;
+        }
+        .glass-floating .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .glass-floating .list-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        .glass-floating .list-more {
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+        .glass-floating .list-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .glass-floating .list-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .glass-floating .item-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #6C5CE7, #A29BFE);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 16px;
+            margin-right: 12px;
+        }
+        .glass-floating .item-info {
+            flex: 1;
+        }
+        .glass-floating .item-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 3px;
+        }
+        .glass-floating .item-role {
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+        }
+        .glass-floating .item-value {
+            text-align: right;
+        }
+        .glass-floating .value-text {
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+        }
+        .glass-floating .bottom-fab {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+        .glass-floating .fab-main {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .glass-floating .fab-main:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+        .glass-floating .fab-side {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .glass-floating .fab-side:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+        
+        /* 滚动条样式 */
+        .phone-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .phone-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .phone-content::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.2);
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 创新设计方案</h1>
+        <p class="subtitle">大胆重构交互流程 · 紧跟流行趋势 · 提升用户体验</p>
+        
+        <div class="phone-container">
+            <!-- 方案一：卡片式仪表盘 -->
+            <div class="phone-wrapper">
+                <div class="phone dashboard-cards">
+                    <div class="phone-content">
+                        <div class="header">
+                            <div class="logo">🍽️ 干饭基金</div>
+                            <div class="menu-btn">☰</div>
+                        </div>
+                        
+                        <div class="main-card">
+                            <div class="card-title">💰 当前基金</div>
+                            <div class="card-amount">¥ 1,234.56</div>
+                            <div class="card-stats">
+                                <div class="stat-item">
+                                    <div class="stat-label">总收入</div>
+                                    <div class="stat-value">¥2,340</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">总支出</div>
+                                    <div class="stat-value">¥1,105</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="quick-actions">
+                            <div class="action-item">
+                                <div class="action-icon" style="background: linear-gradient(135deg, #00FF7F, #00CC66);">💳</div>
+                                <div class="action-label">充值</div>
+                            </div>
+                            <div class="action-item">
+                                <div class="action-icon" style="background: linear-gradient(135deg, #FF6B6B, #FF8E8E);">🛒</div>
+                                <div class="action-label">消费</div>
+                            </div>
+                            <div class="action-item">
+                                <div class="action-icon" style="background: linear-gradient(135deg, #6C5CE7, #A29BFE);">👥</div>
+                                <div class="action-label">成员</div>
+                            </div>
+                            <div class="action-item">
+                                <div class="action-icon" style="background: linear-gradient(135deg, #74B9FF, #0984E3);">📊</div>
+                                <div class="action-label">统计</div>
+                            </div>
+                        </div>
+                        
+                        <div class="members-section">
+                            <div class="section-header">
+                                <div class="section-title">👥 成员概览</div>
+                                <div class="see-all">查看全部 →</div>
+                            </div>
+                            
+                            <div class="member-card">
+                                <div class="member-avatar">明</div>
+                                <div class="member-details">
+                                    <div class="member-name">小明</div>
+                                    <div class="member-contribution">贡献 30%</div>
+                                </div>
+                                <div class="member-amount">
+                                    <div class="amount-value">¥120.00</div>
+                                </div>
+                            </div>
+                            
+                            <div class="member-card">
+                                <div class="member-avatar">红</div>
+                                <div class="member-details">
+                                    <div class="member-name">小红</div>
+                                    <div class="member-contribution">贡献 25%</div>
+                                </div>
+                                <div class="member-amount">
+                                    <div class="amount-value">¥100.00</div>
+                                </div>
+                            </div>
+                            
+                            <div class="member-card">
+                                <div class="member-avatar">刚</div>
+                                <div class="member-details">
+                                    <div class="member-name">小刚</div>
+                                    <div class="member-contribution">贡献 23%</div>
+                                </div>
+                                <div class="member-amount">
+                                    <div class="amount-value">¥90.00</div>
+                                </div>
+                            </div>
+                            
+                            <div class="member-card">
+                                <div class="member-avatar">李</div>
+                                <div class="member-details">
+                                    <div class="member-name">小李</div>
+                                    <div class="member-contribution">贡献 23%</div>
+                                </div>
+                                <div class="member-amount">
+                                    <div class="amount-value">¥90.00</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="height: 80px;"></div>
+                    </div>
+                    
+                    <div class="bottom-nav">
+                        <div class="nav-item active">
+                            <div class="nav-icon">🏠</div>
+                            <span>首页</span>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">📋</div>
+                            <span>记录</span>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">👥</div>
+                            <span>成员</span>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">⚙️</div>
+                            <span>设置</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-label">📊 卡片式仪表盘</div>
+                <div class="style-desc">模块化设计 · 信息清晰 · 操作便捷</div>
+            </div>
+            
+            <!-- 方案二：底部操作栏 -->
+            <div class="phone-wrapper">
+                <div class="phone bottom-action">
+                    <div class="phone-content">
+                        <div class="header">
+                            <div class="logo">🍽️ 干饭基金</div>
+                            <div style="font-size: 24px;">⚙️</div>
+                        </div>
+                        
+                        <div class="wallet-section">
+                            <div class="wallet-label">💰 当前基金</div>
+                            <div class="wallet-amount">¥ 1,234.56</div>
+                            <div class="wallet-actions">
+                                <button class="wallet-btn">转账</button>
+                                <button class="wallet-btn">提现</button>
+                            </div>
+                        </div>
+                        
+                        <div class="quick-stats">
+                            <div class="stat-box">
+                                <div class="stat-box-icon">📈</div>
+                                <div class="stat-box-value">¥2,340</div>
+                                <div class="stat-box-label">累计充值</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-box-icon">📉</div>
+                                <div class="stat-box-value">¥1,105</div>
+                                <div class="stat-box-label">累计消费</div>
+                            </div>
+                        </div>
+                        
+                        <div class="recent-section">
+                            <div class="recent-title">📋 最近交易</div>
+                            
+                            <div class="transaction-item">
+                                <div class="trans-icon income">💵</div>
+                                <div class="trans-details">
+                                    <div class="trans-title">火锅店充值</div>
+                                    <div class="trans-time">今天 14:30</div>
+                                </div>
+                                <div class="trans-amount income">+¥200</div>
+                            </div>
+                            
+                            <div class="transaction-item">
+                                <div class="trans-icon expense">🍜</div>
+                                <div class="trans-details">
+                                    <div class="trans-title">海底捞聚餐</div>
+                                    <div class="trans-time">昨天 19:00</div>
+                                </div>
+                                <div class="trans-amount expense">-¥360</div>
+                            </div>
+                            
+                            <div class="transaction-item">
+                                <div class="trans-icon income">💵</div>
+                                <div class="trans-details">
+                                    <div class="trans-title">烧烤店充值</div>
+                                    <div class="trans-time">2天前</div>
+                                </div>
+                                <div class="trans-amount income">+¥150</div>
+                            </div>
+                            
+                            <div class="transaction-item">
+                                <div class="trans-icon expense">🍲</div>
+                                <div class="trans-details">
+                                    <div class="trans-title">家常菜聚餐</div>
+                                    <div class="trans-time">3天前</div>
+                                </div>
+                                <div class="trans-amount expense">-¥180</div>
+                            </div>
+                        </div>
+                        
+                        <div style="height: 120px;"></div>
+                    </div>
+                    
+                    <div class="floating-bar">
+                        <div class="fab-item">
+                            <div class="fab-icon charge">💳</div>
+                            <span>充值</span>
+                        </div>
+                        <div class="fab-item">
+                            <div class="fab-icon consume">🛒</div>
+                            <span>消费</span>
+                        </div>
+                        <div class="fab-item">
+                            <div class="fab-icon members">👥</div>
+                            <span>成员</span>
+                        </div>
+                        <div class="fab-item">
+                            <div class="fab-icon history">📊</div>
+                            <span>记录</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-label">🎯 底部操作栏</div>
+                <div class="style-desc">单手操作友好 · 大按钮 · 快速访问</div>
+            </div>
+            
+            <!-- 方案三：分屏侧滑 -->
+            <div class="phone-wrapper">
+                <div class="phone split-sliding">
+                    <div class="phone-content" style="padding-top: 45px;">
+                        <div class="split-container">
+                            <div class="left-panel">
+                                <div class="panel-header">
+                                    <div class="app-title">🍽️ 干饭基金</div>
+                                    <div style="font-size: 24px;">☰</div>
+                                </div>
+                                
+                                <div class="balance-card">
+                                    <div class="balance-label">💰 当前基金</div>
+                                    <div class="balance-value">¥ 1,234.56</div>
+                                </div>
+                                
+                                <div class="action-row">
+                                    <button class="action-btn btn-charge">+ 充值</button>
+                                    <button class="action-btn btn-consume">- 消费</button>
+                                </div>
+                                
+                                <div class="members-list">
+                                    <div class="list-title">👥 成员列表</div>
+                                    
+                                    <div class="member-row">
+                                        <div class="row-avatar">明</div>
+                                        <div class="row-info">
+                                            <div class="row-name">小明</div>
+                                        </div>
+                                        <div class="row-amount">¥120.00</div>
+                                    </div>
+                                    
+                                    <div class="member-row">
+                                        <div class="row-avatar">红</div>
+                                        <div class="row-info">
+                                            <div class="row-name">小红</div>
+                                        </div>
+                                        <div class="row-amount">¥100.00</div>
+                                    </div>
+                                    
+                                    <div class="member-row">
+                                        <div class="row-avatar">刚</div>
+                                        <div class="row-info">
+                                            <div class="row-name">小刚</div>
+                                        </div>
+                                        <div class="row-amount">¥90.00</div>
+                                    </div>
+                                    
+                                    <div class="member-row">
+                                        <div class="row-avatar">李</div>
+                                        <div class="row-info">
+                                            <div class="row-name">小李</div>
+                                        </div>
+                                        <div class="row-amount">¥90.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="right-panel">
+                                <div class="right-section">
+                                    <div class="section-title">快捷操作</div>
+                                    <div class="quick-link">
+                                        <div class="link-icon">📊</div>
+                                        <div class="link-text">统计报表</div>
+                                    </div>
+                                    <div class="quick-link">
+                                        <div class="link-icon">📤</div>
+                                        <div class="link-text">导出数据</div>
+                                    </div>
+                                    <div class="quick-link">
+                                        <div class="link-icon">⚙️</div>
+                                        <div class="link-text">设置</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="right-section">
+                                    <div class="section-title">今日概况</div>
+                                    <div class="stat-circle">
+                                        <div class="circle-value">4</div>
+                                        <div class="circle-label">成员</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="right-section">
+                                    <div class="section-title">最近交易</div>
+                                    <div class="recent-item">
+                                        <div class="recent-icon income">💵</div>
+                                        <div class="recent-title">充值</div>
+                                        <div class="recent-amount income">+¥200</div>
+                                    </div>
+                                    <div class="recent-item">
+                                        <div class="recent-icon expense">🍜</div>
+                                        <div class="recent-title">消费</div>
+                                        <div class="recent-amount expense">-¥360</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-label">📱 分屏侧滑</div>
+                <div class="style-desc">左右分栏 · 信息密度高 · 专业感</div>
+            </div>
+            
+            <!-- 方案四：圆环中心 -->
+            <div class="phone-wrapper">
+                <div class="phone circular-hub">
+                    <div class="phone-content">
+                        <div class="header">
+                            <div>
+                                <div class="greeting">下午好 👋</div>
+                                <div class="user-name">干饭小队</div>
+                            </div>
+                            <div class="profile-btn">👤</div>
+                        </div>
+                        
+                        <div class="circular-container">
+                            <div class="outer-ring"></div>
+                            <div class="inner-circle">
+                                <div class="balance-label">💰 当前基金</div>
+                                <div class="balance-amount">¥1,234.56</div>
+                            </div>
+                            
+                            <div class="orbit-icons">
+                                <div class="orbit-item charge">💳</div>
+                                <div class="orbit-item consume">🛒</div>
+                                <div class="orbit-item members">👥</div>
+                                <div class="orbit-item history">📊</div>
+                            </div>
+                        </div>
+                        
+                        <div class="quick-actions">
+                            <div class="action-item">
+                                <div class="action-icon">📊</div>
+                                <div class="action-label">统计</div>
+                            </div>
+                            <div class="action-item">
+                                <div class="action-icon">📤</div>
+                                <div class="action-label">导出</div>
+                            </div>
+                            <div class="action-item">
+                                <div class="action-icon">⚙️</div>
+                                <div class="action-label">设置</div>
+                            </div>
+                            <div class="action-item">
+                                <div class="action-icon">❓</div>
+                                <div class="action-label">帮助</div>
+                            </div>
+                        </div>
+                        
+                        <div class="members-preview">
+                            <div class="preview-title">👥 成员预览</div>
+                            <div class="member-cards">
+                                <div class="member-card">
+                                    <div class="card-avatar">明</div>
+                                    <div class="card-name">小明</div>
+                                    <div class="card-amount">¥120.00</div>
+                                </div>
+                                <div class="member-card">
+                                    <div class="card-avatar">红</div>
+                                    <div class="card-name">小红</div>
+                                    <div class="card-amount">¥100.00</div>
+                                </div>
+                                <div class="member-card">
+                                    <div class="card-avatar">刚</div>
+                                    <div class="card-name">小刚</div>
+                                    <div class="card-amount">¥90.00</div>
+                                </div>
+                                <div class="member-card">
+                                    <div class="card-avatar">李</div>
+                                    <div class="card-name">小李</div>
+                                    <div class="card-amount">¥90.00</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-label">🎯 圆环中心</div>
+                <div class="style-desc">视觉焦点 · 动态交互 · 未来感</div>
+            </div>
+            
+            <!-- 方案五：毛玻璃悬浮 -->
+            <div class="phone-wrapper">
+                <div class="phone glass-floating">
+                    <div class="phone-content">
+                        <div class="glass-container">
+                            <div class="top-bar">
+                                <div class="brand">🍽️ 干饭基金</div>
+                                <div class="notif">🔔</div>
+                            </div>
+                            
+                            <div class="hero-card">
+                                <div class="hero-label">💰 当前基金</div>
+                                <div class="hero-amount">¥ 1,234.56</div>
+                                <div class="hero-buttons">
+                                    <button class="hero-btn btn-primary">快速充值</button>
+                                    <button class="hero-btn btn-secondary">查看详情</button>
+                                </div>
+                            </div>
+                            
+                            <div class="glass-grid">
+                                <div class="glass-item">
+                                    <div class="item-icon green">💳</div>
+                                    <div class="item-label">充值</div>
+                                    <div class="item-sub">记录消费</div>
+                                </div>
+                                <div class="glass-item">
+                                    <div class="item-icon red">🛒</div>
+                                    <div class="item-label">消费</div>
+                                    <div class="item-sub">扣减基金</div>
+                                </div>
+                                <div class="glass-item">
+                                    <div class="item-icon blue">📊</div>
+                                    <div class="item-label">统计</div>
+                                    <div class="item-sub">数据分析</div>
+                                </div>
+                                <div class="glass-item">
+                                    <div class="item-icon purple">👥</div>
+                                    <div class="item-label">成员</div>
+                                    <div class="item-sub">管理团队</div>
+                                </div>
+                            </div>
+                            
+                            <div class="floating-list">
+                                <div class="list-header">
+                                    <div class="list-title">👥 成员列表</div>
+                                    <div class="list-more">管理 →</div>
+                                </div>
+                                
+                                <div class="list-item">
+                                    <div class="item-avatar">明</div>
+                                    <div class="item-info">
+                                        <div class="item-name">小明</div>
+                                        <div class="item-role">贡献 30%</div>
+                                    </div>
+                                    <div class="item-value">
+                                        <div class="value-text">¥120.00</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="list-item">
+                                    <div class="item-avatar">红</div>
+                                    <div class="item-info">
+                                        <div class="item-name">小红</div>
+                                        <div class="item-role">贡献 25%</div>
+                                    </div>
+                                    <div class="item-value">
+                                        <div class="value-text">¥100.00</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="list-item">
+                                    <div class="item-avatar">刚</div>
+                                    <div class="item-info">
+                                        <div class="item-name">小刚</div>
+                                        <div class="item-role">贡献 23%</div>
+                                    </div>
+                                    <div class="item-value">
+                                        <div class="value-text">¥90.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bottom-fab">
+                        <div class="fab-side">📊</div>
+                        <div class="fab-main">+</div>
+                        <div class="fab-side">⚙️</div>
+                    </div>
+                </div>
+                <div class="style-label">✨ 毛玻璃悬浮</div>
+                <div class="style-desc">现代感 · 沉浸式 · 视觉冲击</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

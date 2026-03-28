@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>干饭基金 - UI 设计方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .phone-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .phone {
+            width: 375px;
+            height: 667px;
+            background: #fff;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        .phone::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #000;
+            border-radius: 0 0 20px 20px;
+            z-index: 10;
+        }
+        .phone-content {
+            height: 100%;
+            overflow-y: auto;
+            padding-top: 40px;
+        }
+        
+        /* 方案一：清新简约风 */
+        .clean-minimalist {
+            background: #F7F9F8;
+        }
+        .clean-minimalist .app-bar {
+            background: #4ECDC4;
+            padding: 15px 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .clean-minimalist .fund-card {
+            background: white;
+            margin: 20px;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(78,205,196,0.2);
+            text-align: center;
+        }
+        .clean-minimalist .fund-label {
+            color: #4ECDC4;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .clean-minimalist .fund-amount {
+            font-size: 36px;
+            font-weight: bold;
+            color: #4ECDC4;
+        }
+        .clean-minimalist .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+        .clean-minimalist .action-btn {
+            padding: 18px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .clean-minimalist .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        .clean-minimalist .btn-charge {
+            background: linear-gradient(135deg, #4ECDC4, #95E1D3);
+            color: white;
+        }
+        .clean-minimalist .btn-consume {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+            color: white;
+        }
+        .clean-minimalist .section-title {
+            padding: 0 20px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2C3E50;
+        }
+        .clean-minimalist .member-item {
+            background: white;
+            margin: 0 20px 12px;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .clean-minimalist .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #95E1D3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #4ECDC4;
+            font-size: 18px;
+        }
+        .clean-minimalist .member-info {
+            flex: 1;
+        }
+        .clean-minimalist .member-name {
+            font-weight: bold;
+            color: #2C3E50;
+        }
+        .clean-minimalist .member-amount {
+            font-size: 14px;
+            color: #4ECDC4;
+        }
+        .clean-minimalist .progress-bar {
+            height: 6px;
+            background: #E0E0E0;
+            border-radius: 3px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .clean-minimalist .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ECDC4, #95E1D3);
+            border-radius: 3px;
+        }
+        .clean-minimalist .percentage {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        /* 方案二：深色科技风 */
+        .dark-tech {
+            background: #0F172A;
+            color: #F1F5F9;
+        }
+        .dark-tech .app-bar {
+            background: transparent;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dark-tech .app-bar h2 {
+            font-size: 20px;
+            background: linear-gradient(90deg, #8B5CF6, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .dark-tech .fund-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            margin: 20px;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+            text-align: center;
+        }
+        .dark-tech .fund-label {
+            color: #8B5CF6;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .dark-tech .fund-amount {
+            font-size: 42px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #8B5CF6, #06B6D4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+        .dark-tech .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(139, 92, 246, 0.3);
+        }
+        .dark-tech .stat-item {
+            background: rgba(6, 182, 212, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .dark-tech .stat-label {
+            font-size: 12px;
+            color: #94A3B8;
+        }
+        .dark-tech .stat-value {
+            font-size: 14px;
+            font-weight: bold;
+            color: #06B6D4;
+        }
+        .dark-tech .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+        .dark-tech .action-btn {
+            padding: 18px;
+            border: 2px solid;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+        }
+        .dark-tech .action-btn:hover {
+            box-shadow: 0 0 20px currentColor;
+            transform: translateY(-2px);
+        }
+        .dark-tech .btn-charge {
+            border-color: #8B5CF6;
+            color: #8B5CF6;
+        }
+        .dark-tech .btn-consume {
+            border-color: #06B6D4;
+            color: #06B6D4;
+        }
+        .dark-tech .section-title {
+            padding: 0 20px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #F1F5F9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dark-tech .member-item {
+            background: rgba(30, 41, 59, 0.6);
+            margin: 0 20px 12px;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        .dark-tech .rank {
+            font-size: 20px;
+            margin-right: 8px;
+        }
+        .dark-tech .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B5CF6, #06B6D4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 18px;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+        .dark-tech .progress-bar {
+            height: 8px;
+            background: rgba(139, 92, 246, 0.2);
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .dark-tech .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #8B5CF6, #06B6D4);
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.8);
+        }
+        
+        /* 方案三：温馨日系风 */
+        .cute-japanese {
+            background: #FFF8E7;
+        }
+        .cute-japanese .app-bar {
+            background: linear-gradient(135deg, #FF9F43, #FFA69E);
+            padding: 15px 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .cute-japanese .fund-card {
+            background: white;
+            margin: 20px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(255, 159, 67, 0.15);
+            text-align: center;
+            border: 3px solid #FFA69E;
+        }
+        .cute-japanese .fund-label {
+            color: #FF9F43;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .cute-japanese .fund-amount {
+            font-size: 40px;
+            font-weight: bold;
+            color: #FF9F43;
+        }
+        .cute-japanese .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+        .cute-japanese .action-btn {
+            padding: 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .cute-japanese .action-btn:hover {
+            transform: scale(1.05);
+        }
+        .cute-japanese .btn-charge {
+            background: linear-gradient(135deg, #FF9F43, #FFB347);
+            color: white;
+        }
+        .cute-japanese .btn-consume {
+            background: linear-gradient(135deg, #FFA69E, #FFB6C1);
+            color: white;
+        }
+        .cute-japanese .section-title {
+            padding: 0 20px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #6C5B5B;
+        }
+        .cute-japanese .member-item {
+            background: white;
+            margin: 0 20px 12px;
+            padding: 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .cute-japanese .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF9F43, #FFA69E);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(255, 159, 67, 0.3);
+        }
+        .cute-japanese .progress-bar {
+            height: 8px;
+            background: #FFE4E1;
+            border-radius: 4px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .cute-japanese .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF9F43, #FFA69E);
+            border-radius: 4px;
+        }
+        
+        /* 方案四：商务专业风 */
+        .business {
+            background: #F5F7FA;
+        }
+        .business .app-bar {
+            background: #0066CC;
+            padding: 15px 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .business .fund-card {
+            background: white;
+            margin: 20px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 102, 204, 0.1);
+            text-align: center;
+            border-left: 4px solid #0066CC;
+        }
+        .business .fund-label {
+            color: #0066CC;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .business .fund-amount {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2C3E50;
+        }
+        .business .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #E0E0E0;
+        }
+        .business .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: #F5F7FA;
+            border-radius: 8px;
+        }
+        .business .stat-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+        .business .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0066CC;
+        }
+        .business .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+        .business .action-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .business .action-btn:hover {
+            opacity: 0.9;
+        }
+        .business .btn-charge {
+            background: #00C853;
+            color: white;
+        }
+        .business .btn-consume {
+            background: #FF6B6B;
+            color: white;
+        }
+        .business .section-title {
+            padding: 0 20px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2C3E50;
+        }
+        .business .member-item {
+            background: white;
+            margin: 0 20px 10px;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #0066CC;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .business .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            background: #4A90E2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 16px;
+        }
+        .business .progress-bar {
+            height: 4px;
+            background: #E0E0E0;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        .business .progress-fill {
+            height: 100%;
+            background: #0066CC;
+        }
+        .business .member-info {
+            flex: 1;
+        }
+        .business .member-name {
+            font-weight: bold;
+            color: #2C3E50;
+        }
+        .business .member-amount {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        /* 方案五：游戏化风格 */
+        .gamified {
+            background: linear-gradient(135deg, #1A1A2E 0%, #16213E 100%);
+            color: #EAEAEA;
+        }
+        .gamified .app-bar {
+            background: transparent;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .gamified .app-bar h2 {
+            font-size: 18px;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .gamified .level-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #1A1A2E;
+            font-size: 12px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        .gamified .xp-bar {
+            margin: 0 20px 15px;
+            background: rgba(255, 215, 0, 0.2);
+            height: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #FFD700;
+        }
+        .gamified .xp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            width: 45%;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        .gamified .xp-label {
+            text-align: center;
+            margin: 0 20px 20px;
+            font-size: 12px;
+            color: #FFD700;
+        }
+        .gamified .fund-card {
+            background: rgba(22, 33, 62, 0.8);
+            backdrop-filter: blur(10px);
+            margin: 20px;
+            padding: 25px;
+            border-radius: 16px;
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+        .gamified .fund-label {
+            color: #FFD700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .gamified .fund-amount {
+            font-size: 38px;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        .gamified .achievement-badge {
+            margin-top: 15px;
+            background: linear-gradient(135deg, #00FF7F, #00CC66);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #1A1A2E;
+            font-size: 12px;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.4);
+        }
+        .gamified .button-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+        .gamified .action-btn {
+            padding: 18px;
+            border: 3px solid;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(22, 33, 62, 0.6);
+        }
+        .gamified .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px currentColor;
+        }
+        .gamified .btn-charge {
+            border-color: #FFD700;
+            color: #FFD700;
+        }
+        .gamified .btn-consume {
+            border-color: #00FF7F;
+            color: #00FF7F;
+        }
+        .gamified .section-title {
+            padding: 0 20px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #FFD700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .gamified .member-item {
+            background: rgba(22, 33, 62, 0.6);
+            margin: 0 20px 12px;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+        .gamified .rank {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+        .gamified .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #1A1A2E;
+            font-size: 18px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        .gamified .progress-bar {
+            height: 8px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 4px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+        .gamified .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700, #00FF7F);
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+        .gamified .member-level {
+            background: linear-gradient(135deg, #00FF7F, #00CC66);
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            color: #1A1A2E;
+        }
+        
+        .style-label {
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            color: #666;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍽️ 干饭基金 App - UI 设计方案</h1>
+        
+        <div class="phone-container">
+            <!-- 方案一：清新简约风 -->
+            <div>
+                <div class="phone clean-minimalist">
+                    <div class="phone-content">
+                        <div class="app-bar">🍽️ 干饭基金</div>
+                        
+                        <div class="fund-card">
+                            <div class="fund-label">💰 当前基金</div>
+                            <div class="fund-amount">¥ 1,234.56</div>
+                        </div>
+                        
+                        <div class="button-grid">
+                            <button class="action-btn btn-charge">+ 充值</button>
+                            <button class="action-btn btn-consume">- 消费</button>
+                        </div>
+                        
+                        <div class="section-title">👥 成员列表 (4人)</div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">明</div>
+                            <div class="member-info">
+                                <div class="member-name">小明</div>
+                                <div class="member-amount">¥120.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 30%"></div>
+                                </div>
+                                <div class="percentage">30%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">红</div>
+                            <div class="member-info">
+                                <div class="member-name">小红</div>
+                                <div class="member-amount">¥100.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 25%"></div>
+                                </div>
+                                <div class="percentage">25%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">刚</div>
+                            <div class="member-info">
+                                <div class="member-name">小刚</div>
+                                <div class="member-amount">¥90.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 23%"></div>
+                                </div>
+                                <div class="percentage">23%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">李</div>
+                            <div class="member-info">
+                                <div class="member-name">小李</div>
+                                <div class="member-amount">¥90.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 23%"></div>
+                                </div>
+                                <div class="percentage">23%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-label">🌿 方案一：清新简约风</div>
+            </div>
+            
+            <!-- 方案二：深色科技风 -->
+            <div>
+                <div class="phone dark-tech">
+                    <div class="phone-content">
+                        <div class="app-bar">
+                            <h2>🍽️ 干饭基金</h2>
+                            <span>⚙️</span>
+                        </div>
+                        
+                        <div class="fund-card">
+                            <div class="fund-label">💰 余额</div>
+                            <div class="fund-amount">¥ 1,234.56</div>
+                            <div class="stats-row">
+                                <div class="stat-item">
+                                    <div class="stat-label">充值</div>
+                                    <div class="stat-value">¥2,340</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">消费</div>
+                                    <div class="stat-value">¥1,105</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-grid">
+                            <button class="action-btn btn-charge">⚡ 充值</button>
+                            <button class="action-btn btn-consume">💸 消费</button>
+                        </div>
+                        
+                        <div class="section-title">👥 成员贡献排行</div>
+                        
+                        <div class="member-item">
+                            <span class="rank">🥇</span>
+                            <div class="avatar">明</div>
+                            <div class="member-info">
+                                <div class="member-name">小明</div>
+                                <div class="member-amount">¥120.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 30%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <span class="rank">🥈</span>
+                            <div class="avatar">红</div>
+                            <div class="member-info">
+                                <div class="member-name">小红</div>
+                                <div class="member-amount">¥100.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 25%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <span class="rank">🥉</span>
+                            <div class="avatar">刚</div>
+                            <div class="member-info">
+                                <div class="member-name">小刚</div>
+                                <div class="member-amount">¥90.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 23%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <span class="rank">4️⃣</span>
+                            <div class="avatar">李</div>
+                            <div class="member-info">
+                                <div class="member-name">小李</div>
+                                <div class="member-amount">¥90.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 23%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-label">🌃 方案二：深色科技风</div>
+            </div>
+            
+            <!-- 方案三：温馨日系风 -->
+            <div>
+                <div class="phone cute-japanese">
+                    <div class="phone-content">
+                        <div class="app-bar">🍱 干饭基金</div>
+                        
+                        <div class="fund-card">
+                            <div class="fund-label">🍊 我们的干饭基金 🍊</div>
+                            <div class="fund-amount">¥ 1,234.56</div>
+                            <div style="margin-top: 10px; font-size: 14px; color: #FFA69E;">🍽️ 今天吃什么？</div>
+                        </div>
+                        
+                        <div class="button-grid">
+                            <button class="action-btn btn-charge">+ 充钱</button>
+                            <button class="action-btn btn-consume">- 吃饭</button>
+                        </div>
+                        
+                        <div class="section-title">👨‍👩‍👧‍👦 干饭小分队 (4人)</div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">🐻</div>
+                            <div class="member-info">
+                                <div class="member-name">小明</div>
+                                <div class="member-amount">¥120.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 30%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">🐰</div>
+                            <div class="member-info">
+                                <div class="member-name">小红</div>
+                                <div class="member-amount">¥100.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 25%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">🐨</div>
+                            <div class="member-info">
+                                <div class="member-name">小刚</div>
+                                <div class="member-amount">¥90.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 23%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">🦊</div>
+                            <div class="member-info">
+                                <div class="member-name">小李</div>
+                                <div class="member-amount">¥90.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 23%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-label">🌸 方案三：温馨日系风</div>
+            </div>
+            
+            <!-- 方案四：商务专业风 -->
+            <div>
+                <div class="phone business">
+                    <div class="phone-content">
+                        <div class="app-bar">Fund Manager</div>
+                        
+                        <div class="fund-card">
+                            <div class="fund-label">当前基金余额</div>
+                            <div class="fund-amount">¥ 1,234.56</div>
+                            <div class="stats-row">
+                                <div class="stat-item">
+                                    <div class="stat-label">收入</div>
+                                    <div class="stat-value">¥2,340</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">支出</div>
+                                    <div class="stat-value">¥1,105</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-grid">
+                            <button class="action-btn btn-charge">+ 充值</button>
+                            <button class="action-btn btn-consume">- 消费</button>
+                        </div>
+                        
+                        <div class="section-title">成员统计</div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">1</div>
+                            <div class="member-info">
+                                <div class="member-name">小明</div>
+                                <div class="member-amount">¥120.00 30%</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 30%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">2</div>
+                            <div class="member-info">
+                                <div class="member-name">小红</div>
+                                <div class="member-amount">¥100.00 25%</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 25%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">3</div>
+                            <div class="member-info">
+                                <div class="member-name">小刚</div>
+                                <div class="member-amount">¥90.00 23%</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 23%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <div class="avatar">4</div>
+                            <div class="member-info">
+                                <div class="member-name">小李</div>
+                                <div class="member-amount">¥90.00 23%</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 23%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-label">💼 方案四：商务专业风</div>
+            </div>
+            
+            <!-- 方案五：游戏化风格 -->
+            <div>
+                <div class="phone gamified">
+                    <div class="phone-content">
+                        <div class="app-bar">
+                            <h2>🍽️ 干饭大师</h2>
+                            <span class="level-badge">LV.3</span>
+                        </div>
+                        
+                        <div class="xp-bar">
+                            <div class="xp-fill"></div>
+                        </div>
+                        <div class="xp-label">经验值: 450/1000</div>
+                        
+                        <div class="fund-card">
+                            <div class="fund-label">💰 财富值</div>
+                            <div class="fund-amount">¥ 1,234.56</div>
+                            <div class="achievement-badge">🏆 成就: 首充达人 ⭐</div>
+                        </div>
+                        
+                        <div class="button-grid">
+                            <button class="action-btn btn-charge">⚔️ 战斗充值<br><span style="font-size: 12px; opacity: 0.8;">+10 EXP</span></button>
+                            <button class="action-btn btn-consume">🍖 消费副本<br><span style="font-size: 12px; opacity: 0.8;">+5 EXP</span></button>
+                        </div>
+                        
+                        <div class="section-title">👥 勇士团 (4人)</div>
+                        
+                        <div class="member-item">
+                            <span class="rank">🥇</span>
+                            <div class="avatar">明</div>
+                            <div class="member-info">
+                                <div class="member-name">小明 <span class="member-level">LV2</span></div>
+                                <div class="member-amount">¥120.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 30%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <span class="rank">🥈</span>
+                            <div class="avatar">红</div>
+                            <div class="member-info">
+                                <div class="member-name">小红 <span class="member-level">LV1</span></div>
+                                <div class="member-amount">¥100.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 25%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <span class="rank">🥉</span>
+                            <div class="avatar">刚</div>
+                            <div class="member-info">
+                                <div class="member-name">小刚 <span class="member-level">LV1</span></div>
+                                <div class="member-amount">¥90.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 23%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="member-item">
+                            <span class="rank">4️⃣</span>
+                            <div class="avatar">李</div>
+                            <div class="member-info">
+                                <div class="member-name">小李 <span class="member-level">LV1</span></div>
+                                <div class="member-amount">¥90.00</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 23%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-label">🎮 方案五：游戏化风格</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

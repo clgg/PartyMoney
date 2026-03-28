@@ -30,12 +30,6 @@ class _RechargeScreenState extends ConsumerState<RechargeScreen> {
     return rebate - recharge;
   }
 
-  double _getPerMemberContribution() {
-    final members = ref.read(appDataProvider).members;
-    if (members.isEmpty) return 0.0;
-    return _getRebateDifference() / members.length;
-  }
-
   void _handleRecharge() {
     if (!_formKey.currentState!.validate()) return;
     if (_selectedPayerId == null) {
@@ -66,8 +60,11 @@ class _RechargeScreenState extends ConsumerState<RechargeScreen> {
     final appData = ref.watch(appDataProvider);
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        title: const Text('充值记录'),
+        title: const Text('💳 充值'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Form(
         key: _formKey,
@@ -142,9 +139,9 @@ class _RechargeScreenState extends ConsumerState<RechargeScreen> {
                       color: Colors.orange.shade800,
                     ),
                   ),
-                  if (appData.members.isNotEmpty)
+                  if (_selectedPayerId != null)
                     Text(
-                      '每人贡献: ¥${_getPerMemberContribution().toStringAsFixed(2)}',
+                      '¥${_getRebateDifference().toStringAsFixed(2)} 将增加到选定付款人的贡献中',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.orange.shade700,
@@ -196,17 +193,42 @@ class _RechargeScreenState extends ConsumerState<RechargeScreen> {
               ),
             ),
             const SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: _handleRecharge,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                minimumSize: const Size(double.infinity, 50),
+            Container(
+              width: double.infinity,
+              height: 56,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF00B894), Color(0xFF00CEC9)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF00B894).withOpacity(0.3),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
               ),
-              child: const Text(
-                '确认充值',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              child: ElevatedButton(
+                onPressed: _handleRecharge,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: const Text(
+                  '确认充值',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ],

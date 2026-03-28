@@ -51,8 +51,11 @@ class _ConsumeScreenState extends ConsumerState<ConsumeScreen> {
     final amount = double.tryParse(_amountController.text) ?? 0.0;
 
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        title: const Text('消费记录'),
+        title: const Text('🛒 消费'),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
       body: Form(
         key: _formKey,
@@ -160,17 +163,42 @@ class _ConsumeScreenState extends ConsumerState<ConsumeScreen> {
               ),
             ),
             const SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: _handleConsume,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                minimumSize: const Size(double.infinity, 50),
+            Container(
+              width: double.infinity,
+              height: 56,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFFFF7675), Color(0xFFFD79A8)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFFFF7675).withOpacity(0.3),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
               ),
-              child: const Text(
-                '确认消费',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              child: ElevatedButton(
+                onPressed: _handleConsume,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                child: const Text(
+                  '确认消费',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ],

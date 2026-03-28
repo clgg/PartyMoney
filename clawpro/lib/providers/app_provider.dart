@@ -73,11 +73,11 @@ class AppDataNotifier extends StateNotifier<AppData> {
     _dirty = true;
 
     final rebateDifference = rebateAmount - rechargeAmount;
-    final perMemberContribution = rebateDifference / state.members.length;
 
+    // 只给选定的付款人增加贡献金额（返利差额）
     final contributions = <String, double>{};
     for (final member in state.members) {
-      contributions[member.id] = perMemberContribution;
+      contributions[member.id] = (member.id == payerId) ? rebateDifference : 0.0;
     }
 
     final transaction = Transaction(
@@ -188,6 +188,28 @@ class AppDataNotifier extends StateNotifier<AppData> {
   double getTotalConsume() {
     return state.transactions
         .where((t) => t.transactionType == TransactionType.consume)
+        .fold<double>(0.0, (sum, t) => sum + t.amount);
+  }
+
+  double getTodayRecharge() {
+    final today = DateTime.now();
+    return state.transactions
+        .where((t) =>
+            t.transactionType == TransactionType.recharge &&
+            t.createdAt.year == today.year &&
+            t.createdAt.month == today.month &&
+            t.createdAt.day == today.day)
+        .fold<double>(0.0, (sum, t) => sum + t.amount);
+  }
+
+  double getTodayConsume() {
+    final today = DateTime.now();
+    return state.transactions
+        .where((t) =>
+            t.transactionType == TransactionType.consume &&
+            t.createdAt.year == today.year &&
+            t.createdAt.month == today.month &&
+            t.createdAt.day == today.day)
         .fold<double>(0.0, (sum, t) => sum + t.amount);
   }
 }
